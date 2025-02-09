@@ -1,23 +1,23 @@
-// Generic swap function to swap anything
+// Generic swap function
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-void swap(void *p1, void *p2, int noBytes)
+void swap(void *a, void *b, int noOfBytes)
 {
-	char buffer[noBytes];
-	memcpy(buffer, p1, noBytes);
-	memcpy(p1, p2, noBytes);
-	memcpy(p2, buffer, noBytes);
+	char buffer[noOfBytes];
+	memcpy(buffer, a, noOfBytes);
+	memcpy(a, b, noOfBytes);
+	memcpy(b, buffer, noOfBytes);
 }
-
 
 int main()
 {
-	char x, y;
-	x = 'A', y = 'B';
-	printf("Before swap, x = %c and y = %c\n", x, y);
-	swap(&x, &y, sizeof(char));
-	printf("After swap, x = %c and y = %c\n", x, y);
+	long int a = 565, b = 4545;
+	printf("Before swapping: a = %ld, b = %ld\n", a, b);
+	swap(&a, &b, sizeof(long int));
+	printf("After swapping: a = %ld, b = %ld\n", a, b);
 	return 0;
 }
+

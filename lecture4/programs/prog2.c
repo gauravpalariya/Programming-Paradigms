@@ -1,33 +1,24 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-void swap(void *vp1, void *vp2, int noOfBytes)
+void *lsearch(void *arr, int noOfElements, void *key, int sizeOfElement)
 {
-	char buffer[noOfBytes];
-	memcpy(buffer, vp1, noOfBytes);
-	memcpy(vp1, vp2, noOfBytes);
-	memcpy(vp2, buffer, noOfBytes);
-}
-
-void printArray(int *p, int size)
-{
-	for(int i = 0; i < size; ++i) 
-		printf("%d ", p[i]);
-	printf("\n");
+	for(int i = 0; i < noOfElements; ++i)
+	{
+		void *elementAddress = (char *)arr + i*sizeOfElement;
+		if(memcmp(elementAddress, key, sizeOfElement) == 0) return elementAddress;
+	}
+	return NULL;
 }
 
 int main()
 {
-
-	int arr1[5] = {10,20,30,40,50}, num1;
-	int arr2[5] = {60,70,80,90,100}, num2;
-	printf("before swapping\n");
-	printf("Array 1: "); printArray(arr1, 5);
-	printf("Array 2: "); printArray(arr2, 5);
-	swap(arr1, arr2, sizeof(arr1));
-	printf("Array 1: "); printArray(arr1, 5);
-	printf("Array 2: "); printArray(arr2, 5);
-
-	
+	long int array[] = {3453453,3543535,5757,8797,3453}; // array of 5 elements
+	long int key = 9;
+	int noOfElements = 5;
+	long int *location = lsearch(array, noOfElements, &key, sizeof(long int));
+	if(location) printf("The element %ld is located at location %p\n", *location, location);
+	else printf("The element is not located in the array\n");
 	return 0;
 }

@@ -1,21 +1,24 @@
+// so i am implementing a swap function to swap two integers
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-void swap(void *vp1, void *vp2, int noOfBytes)
+void swap(int *a1, int *a2)
 {
-	char buffer[noOfBytes];
-	memcpy(buffer, vp1, noOfBytes);
-	memcpy(vp1, vp2, noOfBytes);
-	memcpy(vp2, buffer, noOfBytes);
+	int temp = *a1;
+	*a1 = *a2;
+	*a2 = temp;
 }
 
 int main()
 {
-	char *husband = ("fred");
-	char *wife = ("Wilma");
-	printf("Before Swapping: husband = %s | wife = %s\n", husband, wife);
-	swap(&husband, &wife, sizeof(char *));
-	printf("After Swapping: husband = %s | wife = %s\n", husband, wife);
-   return 0;
+	int a = 45, b = 35;
+	printf("Values before: a = %d and b = %d\n", a, b);
+	swap(&a, &b);
+	printf("Values after: a = %d and b = %d\n", a, b);
+	return 0;
 }
+
+
+
